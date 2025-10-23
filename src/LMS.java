@@ -63,8 +63,35 @@ public class LMS {
 
     }
 
+    public static boolean duplicateCheck(String cityName){
+        //Methods use to check duplicates
+        for(int i = 0; i<cityCounter; i++){
+            if(cityName.equals(Cities[i])){
+                return true;
+            }
+        }return false;
+    }
+
+
     public static void addNewcity(Scanner input) {
         //Method of adding new city to the system
+        if(cityCounter >= Cities.length){
+            System.out.println("Error! City limit is exceeded");
+            return;
+        }
+        System.out.println("Enter the name of the city");
+        String newCity = input.nextLine();
+
+        //check the capacity and the availability of the duplicates
+        if(duplicateCheck(newCity)){
+            System.out.println("Error! "+newCity+" already in use");
+            return;
+        }
+
+        //Add the city
+        Cities[cityCounter] = newCity;
+        cityCounter++;
+        System.out.println("City added successfully!");
     }
 
     public static void renameCity(Scanner input) {
