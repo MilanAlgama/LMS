@@ -96,6 +96,29 @@ public class LMS {
 
     public static void renameCity(Scanner input) {
         //Method of renaming an existing city from the system
+        allCities(input);
+        System.out.print("Enter the number of the city: ");
+        int cityNumber = input.nextInt();
+        input.nextLine();
+
+        //Check the validity of the number
+        if(cityNumber < 1 || cityNumber > cityCounter){
+            System.out.println("Error! Invalid number");
+            return;
+        }
+
+        String oldCity = Cities[cityNumber-1];
+        System.out.print("Enter a new name for the "+oldCity+" :");
+        String newCity = input.nextLine();
+
+        //Duplicate checking....
+        if(duplicateCheck(newCity)){
+            System.out.println("Error! "+newCity+" already in use");
+            return;
+        }
+
+        Cities[cityNumber-1] = newCity;
+        System.out.println("City renamed successfully!");
     }
 
     public static void removeCity(Scanner input) {
@@ -104,12 +127,19 @@ public class LMS {
 
     private static void allCities(Scanner input) {
         //Method of displaying all the cities in the system
+        System.out.println("\n---List of all cities---");
+        for(int i = 0; i < cityCounter; i++){
+            System.out.println(i+1 + ":   "+Cities[i]);
+        }
+        System.out.println(".....................................");
     }
+
+    //---------------------------------------------------------------------------------------------
+
 
     public static void manageDistances(Scanner input) {
         //This is the sub menu including the intercity distances
     }
-    //-------------------------------------------------------------------------------------------
 
     //Vehicle management
     public static void vehicleDetails(Scanner input){
