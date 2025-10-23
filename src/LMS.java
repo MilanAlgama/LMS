@@ -123,6 +123,20 @@ public class LMS {
 
     public static void removeCity(Scanner input) {
         //Method of removing an existing city from the system
+        allCities(input);
+        System.out.print("Enter the number of the city you want to remove: ");
+        int cityNumber = input.nextInt();
+        input.nextLine();
+
+        //Check the validity of the number
+        if(cityNumber < 1 || cityNumber > cityCounter){
+            System.out.println("Error! Invalid number");
+            return;
+        }
+        for(int i = cityNumber-1; i < cityCounter-1; i++){
+            Cities[i]=Cities[i+1];
+        }cityCounter--;
+        System.out.println("City removed successfully!");
     }
 
     private static void allCities(Scanner input) {
