@@ -4,6 +4,9 @@ public class LMS {
     public static String[] Cities = new String[30];
     public static int cityCounter = 0;
 
+    // 2D Array used for Cities
+    public static int[][] distancesOfCities = new int[30][30];
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
@@ -153,6 +156,35 @@ public class LMS {
 
     public static void manageDistances(Scanner input) {
         //This is the sub menu including the intercity distances
+        int distanceChoice;
+
+        //New line
+        input.nextLine();
+        do {
+            System.out.println("\n-----Manage Distances-----");
+            System.out.println("1. Input or Edit Distance");
+            System.out.println("2. Display Distance Table");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+            distanceChoice = input.nextInt();
+
+            //Sub choices for distance management
+            switch (distanceChoice) {
+                case 1 -> editDistances(input);
+                case 2 -> displayDistances(input);
+                case 0 -> System.out.println("Back to the Main Menu... ");
+                default -> System.out.println("Invalid choice");
+            }
+        }while(distanceChoice != 0);
+    }
+
+    public static void editDistances(Scanner input){
+        //Method of Input or Edit distance between cities
+    }
+
+    public static void displayDistances(Scanner input){
+        //Method of displaying the Distances between cities
+
     }
 
     //Vehicle management
