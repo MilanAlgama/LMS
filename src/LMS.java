@@ -145,6 +145,10 @@ public class LMS {
     private static void allCities(Scanner input) {
         //Method of displaying all the cities in the system
         System.out.println("\n---List of all cities---");
+        if (cityCounter == 0) {
+            System.out.println("No cities have been added yet.");
+            return;
+        }
         for(int i = 0; i < cityCounter; i++){
             System.out.println(i+1 + ":   "+Cities[i]);
         }
@@ -212,6 +216,29 @@ public class LMS {
 
     public static void displayDistances(Scanner input){
         //Method of displaying the Distances between cities
+        if (cityCounter == 0) {
+            System.out.println("No  cities have been added yet.");
+            return;
+        }
+
+        System.out.println("\n--- Intercity Distance Table (Direct Routes) ---");
+
+        // Chart to display the table of distances between cities
+        System.out.print("\t");
+        for (int i = 0; i < cityCounter; i++) {
+            System.out.print(Cities[i] + "\t");
+        }
+        System.out.println();
+
+        for (int i = 0; i < cityCounter; i++) {
+            System.out.print(Cities[i] + "\t");
+
+
+            for (int j = 0; j < cityCounter; j++) {
+                System.out.print(distancesOfCities[i][j] + "\t");
+            }
+            System.out.println();
+        }
 
     }
 
