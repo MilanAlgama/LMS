@@ -180,6 +180,34 @@ public class LMS {
 
     public static void editDistances(Scanner input){
         //Method of Input or Edit distance between cities
+        allCities(input);
+        System.out.print("Enter the index of the source city: ");
+        int startingCityindex =  input.nextInt();
+        input.nextLine();
+
+        System.out.print("Enter the index of the destination city: ");
+        int endingCityindex =  input.nextInt();
+
+        //Check the validity of the numbers entered by the user
+        if (startingCityindex < 0 || startingCityindex > cityCounter || endingCityindex < 0 || endingCityindex > cityCounter) {
+            System.out.println("Error: Invalid city index.");
+            return;
+        }
+
+        //Prevent distance entering from city to itself
+        if (startingCityindex == endingCityindex) {
+            System.out.println("Error: You can't enter the same cities to enter distances.");
+            distancesOfCities[startingCityindex][endingCityindex] = 0;
+            return;
+        }
+        System.out.println("Enter the distance between "+startingCityindex+" and "+endingCityindex+" (in km): ");
+        int interDistance = input.nextInt();
+        input.nextLine();
+
+        distancesOfCities[startingCityindex][endingCityindex] = interDistance;
+        distancesOfCities[endingCityindex][startingCityindex] = interDistance;
+
+        System.out.println("Distance entered successfully!");
     }
 
     public static void displayDistances(Scanner input){
