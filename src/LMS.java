@@ -23,6 +23,7 @@ public class LMS {
     public static double[] deliveryTimes = new double[50];
     public static double[] deliveryCustomerCharges = new double[50];
     public static double[] deliveryProfits = new double[50];
+    public static int deliveryCounter = 0;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -283,6 +284,29 @@ public class LMS {
     //Delivery Request Handling
     public static void deliveryRequests(Scanner input){
         //This is the sub menu handling the requests received from the user and display the charge for the relevant delivery
+        //Check the availability for a delivery
+        if (deliveryCounter >= 50) {
+            System.out.println("Error: Delivery records are full. Cannot add more.");
+            return;
+        }
+
+        allCities(input);
+        System.out.println("Enter the number of the starting city: ");
+        int startingCityIndex =  input.nextInt();
+
+        System.out.println("Enter the number of the destination city: ");
+        int endingCityIndex =  input.nextInt();
+        input.nextLine();
+
+        //Check the validity of cities
+        if(startingCityIndex < 0 || startingCityIndex >= cityCounter || endingCityIndex < 0 || endingCityIndex > cityCounter){
+            System.out.println("Error: Invalid city indices.");
+            return;
+        }
+        if(startingCityIndex == endingCityIndex){
+            System.out.println("Error: You can't enter the same cities to enter distances..");
+            return;
+        }
     }
 
     //Delivery records
