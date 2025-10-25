@@ -370,6 +370,11 @@ public class LMS {
         return (double) D/S;
     }
 
+    private static double calculateFuelConsumed(double D, double E) {
+        // Calculate the fuel consumption
+        return (double) D / E;
+    }
+
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
         for(int i=0; i<cityCounter; i++){
