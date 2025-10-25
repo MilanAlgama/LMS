@@ -227,10 +227,10 @@ public class LMS {
         }
         System.out.println("Enter the distance between "+startingCityindex+" and "+endingCityindex+" (in km): ");
         int interDistance = input.nextInt();
-        input.nextLine();
+        //input.nextLine();
 
-        distancesOfCities[startingCityindex][endingCityindex] = interDistance;
-        distancesOfCities[endingCityindex][startingCityindex] = interDistance;
+        distancesOfCities[startingCityindex-1][endingCityindex-1] = interDistance;
+        distancesOfCities[endingCityindex-1][startingCityindex-1] = interDistance;
 
         System.out.println("Distance entered successfully!");
     }
@@ -342,6 +342,21 @@ public class LMS {
             System.out.println("Error: you entered "+weightOfGoods+"kg exceed the capacity of "+vehicleCapacity[vehicleNumber]+"kg.");
             return;
         }
+
+        //Use the shortest path for the delivery
+        int D = shortestDistances[startingCityIndex][endingCityIndex];
+
+        // Check if there were any short path
+        if (D == Integer.MAX_VALUE / 2) {
+            System.out.println("Error: No short route found between " + Cities[startingCityIndex] + " and " + Cities[endingCityIndex] + ".");
+            return;
+        }
+
+        //Assign variables for the calculation
+        double W = weightOfGoods;
+        int R = vehicleRate[vehicleNumber];
+        int S = vehicleAvgSpeed[vehicleNumber];
+        int E = vehicleFuelEff[vehicleNumber];
 
     }
 
