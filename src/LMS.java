@@ -299,7 +299,7 @@ public class LMS {
         input.nextLine();
 
         //Check the validity of cities
-        if(startingCityIndex < 0 || startingCityIndex >= cityCounter || endingCityIndex < 0 || endingCityIndex > cityCounter){
+        if(startingCityIndex < 0 || startingCityIndex > cityCounter || endingCityIndex < 0 || endingCityIndex > cityCounter){
             System.out.println("Error: Invalid city indices.");
             return;
         }
@@ -307,6 +307,39 @@ public class LMS {
             System.out.println("Error: You can't enter the same cities to enter distances..");
             return;
         }
+
+        //Get the weight from the user
+        System.out.println("Enter the weight of the goods in (kg): ");
+        double weightOfGoods = input.nextDouble();
+        input.nextLine();
+
+        if(weightOfGoods >= 10000){
+            System.out.println("Your weights can't delivery from these vehicles");
+            return;
+        }
+
+        //Get the vehicle type from the user
+        System.out.println("Select Vehicle Type: ");
+        System.out.println("1. Van (max 1000kg)");
+        System.out.println("2. Truck (max 5000kg)");
+        System.out.println("3. Lorry (max 10000kg)");
+        System.out.println("Enter the number of the vehicle type: ");
+        int vehicleType = input.nextInt();
+        input.nextLine();
+
+        //check the validity of the user inputs
+        if (vehicleType < 1 || vehicleType > 3) {
+            System.out.println("Error: Invalid vehicle choice.");
+            return;
+        }
+
+        int vehicleNumber = vehicleType-1;
+        //Check the limit of the user input weights with the capacity of the vehicle
+        if(weightOfGoods >= vehicleCapacity[vehicleNumber] ){
+            System.out.println("Error: you entered "+weightOfGoods+"kg exceed the capacity of "+vehicleCapacity[vehicleNumber]+"kg.");
+            return;
+        }
+
     }
 
     //Delivery records
