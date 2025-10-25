@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 public class LMS {
     // Arrays and Variables used for Cities
@@ -428,8 +430,8 @@ public class LMS {
 
     public static void deliveryRecords(int startingCityIndex, int endingCityIndex, double weightOfGoods, int vehicleNumber, double distance, double deliveryTime, double charge, double profit) {
         //This method use to save all the delivery records
-        deliveryStart[deliveryCounter]=Cities[startingCityIndex];
-        deliveryEnd[deliveryCounter]=Cities[endingCityIndex];
+        deliveryStart[deliveryCounter]=Cities[startingCityIndex-1];
+        deliveryEnd[deliveryCounter]=Cities[endingCityIndex-1];
         deliveryWeights[deliveryCounter]=weightOfGoods;
         deliveryVehicles[deliveryCounter]=vehicleTypes[vehicleNumber];
         deliveryDistances[deliveryCounter]=distance;
@@ -444,11 +446,25 @@ public class LMS {
     //Delivery records
     public static void pastDeliveryRecords(Scanner input){
         //This is the sub menu to view the history of deliveries
+        System.out.println("\n--- Delivery Records ---");
+
+        if (deliveryCounter == 0) {
+            System.out.println("Deliveries are not done yet.");
+        } else {
+            System.out.printf("%-12s %-12s %-10s %-10s %-10s %-15s\n",
+                    "From", "To", "Weight(kg)", "Vehicle", "Distance(km)", "Charge(LKR)");
+            System.out.println("----------------------------------------------------------------------");
+
+            for (int i = 0; i < deliveryCounter; i++) {
+                // Print each row
+                System.out.printf("%-12s %-12s %-10.1f %-10s %-10.1f %-15.2f\n", deliveryStart[i], deliveryEnd[i], deliveryWeights[i], deliveryVehicles[i], deliveryDistances[i], deliveryCustomerCharges[i]);
+            }
+        }
     }
 
     //Performance report
     public static void performanceReport(Scanner input){
         //This is the sub menu can be used to obtain report of the process at the time
-    }
 
+    }
 }
