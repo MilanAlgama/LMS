@@ -1,7 +1,1 @@
-3
-Kelaniya
-Colombo
-Kiribathgoda
-0 10 4 
-10 0 0 
-4 0 0 
+0

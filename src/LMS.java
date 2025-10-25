@@ -46,9 +46,12 @@ public class LMS {
             System.out.println("4. Handle Delivery Request");
             System.out.println("5. View Delivery Records");
             System.out.println("6. Show Performance Reports");
+            System.out.println("7. Reset All Data");
             System.out.println("0. Save and Exit ");
             System.out.print("Enter your choice: ");
             choice = input.nextInt();
+            input.nextLine();
+
             switch (choice) {
                 case 1 -> manageCities(input);
                 case 2 -> manageDistances(input);
@@ -56,6 +59,7 @@ public class LMS {
                 case 4 -> deliveryRequests(input);
                 case 5 -> pastDeliveryRecords(input);
                 case 6 -> performanceReport(input);
+                case 7 -> resetAllData(input);
                 case 0 -> System.out.println("Save and Exit ");
                 default -> System.out.println("Invalid choice");
             }
@@ -637,6 +641,28 @@ public class LMS {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error loading deliveries.txt: " + e.getMessage());
+        }
+    }
+
+    public static void resetAllData(Scanner input) {
+        //Method use to reset all the data entered to the system
+        System.out.println("\n--- Reset All Data ---");
+        System.out.print("Are you sure you want to erase ALL cities, distances, and delivery records? (Yes/No): ");
+        String confirm = input.nextLine();
+        input.nextLine();
+
+        if (confirm.equals("Yes") || confirm.equals("Y")) {
+
+            // 1. Reset the counters in memory
+            cityCounter = 0;
+            deliveryCounter = 0;
+            saveData();
+
+            System.out.println("All data has been reset.");
+            System.out.println("Please restart the program to use the empty data.");
+
+        } else {
+            System.out.println("Reset cancelled.");
         }
     }
 }
