@@ -365,6 +365,11 @@ public class LMS {
         return D*R*(1+W*1/10000.0);
     }
 
+    private static double calculateDeliveryTime(double D, double S) {
+        // Delivery time calculation
+        return (double) D/S;
+    }
+
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
         for(int i=0; i<cityCounter; i++){
