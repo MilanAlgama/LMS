@@ -7,6 +7,13 @@ public class LMS {
     // 2D Array used for Cities
     public static int[][] distancesOfCities = new int[30][30];
 
+    //Arrays used for the vehicle details
+    public static String[] vehicleTypes = {"Van","Truck","Lorry"};
+    public static int[] vehicleCapacity = {1000,5000,10000};
+    public static int[] vehicleRate = {30,40,80};
+    public static int[] vehicleAvgSpeed = {60,50,45};
+    public static int[] vehicleFuelEff = {12,6,4};
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
@@ -245,6 +252,22 @@ public class LMS {
     //Vehicle management
     public static void vehicleDetails(Scanner input){
         //This is the sub menu including the Vehicle type, Capacity (kg), Rate per km (LKR), Avg Speed (km/h) and Fuel Efficiency (km/l)
+        System.out.println("\n---Vehicle Details---");
+
+        //Print table
+        System.out.printf("%-10s %-15s %-17s %-15s %-20s\n",
+                "Type", "Capacity(kg)", "Rate(LKR)", "Speed(km/h)  ", "Efficiency(km/l)");
+        System.out.println("-----------------------------------------------------------------------------------");
+
+        for(int i = 0; i < vehicleTypes.length; i++){
+            System.out.printf("%-10s %-15d %-15d %-15d %-20d\n",
+                    vehicleTypes[i],
+                    vehicleCapacity[i],
+                    vehicleRate[i],
+                    vehicleAvgSpeed[i],
+                    vehicleFuelEff[i]
+            );
+        }
     }
 
     //Delivery Request Handling
