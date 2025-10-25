@@ -380,7 +380,10 @@ public class LMS {
         return fuelConsumed*priceOfFuel ;
     }
 
-
+    private static double calculateTotalCost(double deliveryCost, double fuelCost) {
+        // Calculate the total cost spent for a delivery
+        return deliveryCost + fuelCost;
+    }
 
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
