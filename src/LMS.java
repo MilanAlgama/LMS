@@ -390,6 +390,11 @@ public class LMS {
         return deliveryCost * 0.25;
     }
 
+    private static double calculateFinalCharge(double totalCost, double profit) {
+        // Customer Charge = TotalCost + Profit
+        return totalCost + profit;
+    }
+
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
         for(int i=0; i<cityCounter; i++){
