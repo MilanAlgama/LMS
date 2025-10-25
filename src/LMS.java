@@ -25,9 +25,6 @@ public class LMS {
     public static double[] deliveryProfits = new double[50];
     public static int deliveryCounter = 0;
 
-    //Array to find the shortest distance
-    public static int[][] shortestDistances = new int[50][50];
-
     //Price of the fuel
     public static double priceOfFuel = 310.0;
 
@@ -347,14 +344,7 @@ public class LMS {
             return;
         }
 
-        //Use the shortest path for the delivery
-        int D = shortestDistances[startingCityIndex][endingCityIndex];
-
-        // Check if there were any short path
-        if (D == Integer.MAX_VALUE / 2) {
-            System.out.println("Error: No short route found between " + Cities[startingCityIndex] + " and " + Cities[endingCityIndex] + ".");
-            return;
-        }
+        int D = distancesOfCities[startingCityIndex-1][endingCityIndex-1];
 
         //Assign variables for the calculation
         double W = weightOfGoods;
@@ -406,21 +396,6 @@ public class LMS {
     private static double calculateFinalCharge(double totalCost, double profit) {
         // Customer Charge = TotalCost + Profit
         return totalCost + profit;
-    }
-
-    public static void calculateShortestDistance(){
-        //Method to find the shortest between the cities
-        for(int i=0; i<cityCounter; i++){
-            for(int j=0; j<cityCounter; j++){
-                if(i==j){
-                    shortestDistances[i][j] = 0;
-                } else if (distancesOfCities[i][j] != 0) {
-                    shortestDistances[i][j] += distancesOfCities[i][j];
-                }else{
-                    shortestDistances[i][j] = Integer.MAX_VALUE/2;
-                }
-            }
-        }
     }
 
     //Delivery records
