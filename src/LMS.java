@@ -28,6 +28,10 @@ public class LMS {
     //Array to find the shortest distance
     public static int[][] shortestDistances = new int[50][50];
 
+    //Price of the fuel
+    public static double priceOfFuel = 310.0;
+
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
@@ -357,6 +361,15 @@ public class LMS {
         int R = vehicleRate[vehicleNumber];
         int S = vehicleAvgSpeed[vehicleNumber];
         int E = vehicleFuelEff[vehicleNumber];
+
+        //Call the methods used for the calculations
+        double deliveryCost = calculateDeliveryCost(D,R,W);
+        double deliveryTime = calculateDeliveryTime(D,S);
+        double fuelConsumed = calculateFuelConsumed(D,E);
+        double fuelCost = calculateFuelCost(fuelConsumed,priceOfFuel);
+        double totalCost = calculateTotalCost(deliveryCost,fuelCost);
+        double profit = profitCalculation(deliveryCost);
+        double CustomerCharge = calculateFinalCharge(totalCost,profit);
 
     }
 
