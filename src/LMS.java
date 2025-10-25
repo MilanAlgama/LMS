@@ -360,6 +360,11 @@ public class LMS {
 
     }
 
+    public static double calculateDeliveryCost(double D, double R, double W){
+        //Delivery cost calculation
+        return D*R*(1+W*1/10000.0);
+    }
+
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
         for(int i=0; i<cityCounter; i++){
