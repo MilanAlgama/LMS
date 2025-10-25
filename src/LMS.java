@@ -375,6 +375,13 @@ public class LMS {
         return (double) D / E;
     }
 
+    private static double calculateFuelCost(double fuelConsumed, double priceOfFuel) {
+        // Calculate the price of the fuel consumed
+        return fuelConsumed*priceOfFuel ;
+    }
+
+
+
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
         for(int i=0; i<cityCounter; i++){
