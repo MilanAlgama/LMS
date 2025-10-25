@@ -361,6 +361,24 @@ public class LMS {
         double profit = profitCalculation(deliveryCost);
         double CustomerCharge = calculateFinalCharge(totalCost,profit);
 
+        //Output of the delivery Estimation
+        System.out.println("\n--- DELIVERY COST ESTIMATION ---");
+        System.out.println("From: " + Cities[startingCityIndex-1]);
+        System.out.println("To: " + Cities[endingCityIndex-1]);
+        System.out.println("Minimum Distance: " + D + " km");
+        System.out.println("Vehicle: " + vehicleTypes[vehicleNumber]);
+        System.out.println("Weight: " + W + " kg");
+        System.out.println("===========================================");
+
+        System.out.printf("Base Cost:        %.2f LKR\n", deliveryCost);
+        System.out.printf("Fuel Used:        %.2f L\n", fuelConsumed);
+        System.out.printf("Fuel Cost:        %.2f LKR\n", fuelCost);
+        System.out.printf("Operational Cost: %.2f LKR\n", totalCost);
+        System.out.printf("Profit:           %.2f LKR\n", profit);
+        System.out.printf("Customer Charge:  %.2f LKR\n", CustomerCharge);
+        System.out.printf("Estimated Time:   %.2f hours\n", deliveryTime);
+        System.out.println("========================================");
+
     }
 
     public static double calculateDeliveryCost(double D, double R, double W){
