@@ -48,7 +48,7 @@ public class LMS {
                 case 2 -> manageDistances(input);
                 case 3 -> vehicleDetails(input);
                 case 4 -> deliveryRequests(input);
-                case 5 -> deliveryRecords(input);
+                case 5 -> pastDeliveryRecords(input);
                 case 6 -> performanceReport(input);
                 case 0 -> System.out.println("Save and Exit ");
                 default -> System.out.println("Invalid choice");
@@ -379,6 +379,16 @@ public class LMS {
         System.out.printf("Estimated Time:   %.2f hours\n", deliveryTime);
         System.out.println("========================================");
 
+        System.out.print("Do you want to save the record? (Yes/No): ");
+        String confirm = input.nextLine();
+
+        if(confirm.equals("Yes")){
+            deliveryRecords(startingCityIndex,endingCityIndex,W,vehicleNumber,D,deliveryTime,CustomerCharge,profit);
+            System.out.println("Delivery Records saved successfully.");
+        }else{
+            System.out.println("Delivery has cancelled");
+        }
+
     }
 
     public static double calculateDeliveryCost(double D, double R, double W){
@@ -416,8 +426,23 @@ public class LMS {
         return totalCost + profit;
     }
 
+    public static void deliveryRecords(int startingCityIndex, int endingCityIndex, double weightOfGoods, int vehicleNumber, double distance, double deliveryTime, double charge, double profit) {
+        //This method use to save all the delivery records
+        deliveryStart[deliveryCounter]=Cities[startingCityIndex];
+        deliveryEnd[deliveryCounter]=Cities[endingCityIndex];
+        deliveryWeights[deliveryCounter]=weightOfGoods;
+        deliveryVehicles[deliveryCounter]=vehicleTypes[vehicleNumber];
+        deliveryDistances[deliveryCounter]=distance;
+        deliveryTimes[deliveryCounter] = deliveryTime;
+        deliveryCustomerCharges[deliveryCounter] = charge;
+        deliveryProfits[deliveryCounter] = profit;
+
+        deliveryCounter++;
+
+    }
+
     //Delivery records
-    public static void deliveryRecords(Scanner input){
+    public static void pastDeliveryRecords(Scanner input){
         //This is the sub menu to view the history of deliveries
     }
 
