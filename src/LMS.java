@@ -385,6 +385,11 @@ public class LMS {
         return deliveryCost + fuelCost;
     }
 
+    private static double profitCalculation(double deliveryCost) {
+        // Calculate the profit of the delivery calculation
+        return deliveryCost * 0.25;
+    }
+
     public static void calculateShortestDistance(){
         //Method to find the shortest between the cities
         for(int i=0; i<cityCounter; i++){
