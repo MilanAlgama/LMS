@@ -470,9 +470,45 @@ public class LMS {
         if (deliveryCounter == 0) {
             System.out.println("No deliveries to display a report..!");
         }else{
-            System.out.println("\n=== Performance Reports ===");
-            System.out.println("-------------------------------");
-            //To be continued...
+            double totDistance = 0;
+            double totTime = 0;
+            double totProfit = 0;
+            double totRevenue = 0;
+
+            //Assume and init arrays for shortest and longest routes
+            double shortestDistance = deliveryDistances[0];
+            double longestDistance = deliveryDistances[0];
+
+            for(int i=0;i<deliveryCounter;i++){
+                totDistance += deliveryDistances[i];
+                totTime += deliveryTimes[i];
+                totRevenue += deliveryCustomerCharges[i];
+                totProfit += deliveryProfits[i];
+
+                //Finding the longest route
+                if(deliveryDistances[i]>longestDistance){
+                    longestDistance = deliveryDistances[i];
+                }
+
+                //Finding the shortest route
+                if(deliveryDistances[i]<shortestDistance){
+                    shortestDistance = deliveryDistances[i];
+                }
+
+            }
+
+            //Calculating the Average time
+            double avgTime = totTime/deliveryCounter;
+
+            //Final Report
+            System.out.printf("Total Deliveries Completed: %d\n", deliveryCounter);
+            System.out.printf("Total Distance Covered:     %.2f km\n", totDistance);
+            System.out.printf("Average Delivery Time:      %.2f hours\n", avgTime);
+            System.out.printf("Total Revenue:              %.2f LKR\n", totRevenue);
+            System.out.printf("Total Profit:               %.2f LKR\n", totProfit);
+            System.out.printf("Shortest Route Completed:   %.2f km\n", shortestDistance);
+            System.out.printf("Longest Route Completed:    %.2f km\n", longestDistance);
+
         }
 
 
