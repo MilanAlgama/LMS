@@ -25,6 +25,9 @@ public class LMS {
     public static double[] deliveryProfits = new double[50];
     public static int deliveryCounter = 0;
 
+    //Array to find the shortest distance
+    public static int[][] shortestDistances = new int[50][50];
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
@@ -340,6 +343,21 @@ public class LMS {
             return;
         }
 
+    }
+
+    public static void calculateShortestDistance(){
+        //Method to find the shortest between the cities
+        for(int i=0; i<cityCounter; i++){
+            for(int j=0; j<cityCounter; j++){
+                if(i==j){
+                    shortestDistances[i][j] = 0;
+                } else if (distancesOfCities[i][j] != 0) {
+                    shortestDistances[i][j] += distancesOfCities[i][j];
+                }else{
+                    shortestDistances[i][j] = Integer.MAX_VALUE/2;
+                }
+            }
+        }
     }
 
     //Delivery records
