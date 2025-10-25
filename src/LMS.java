@@ -14,6 +14,16 @@ public class LMS {
     public static int[] vehicleAvgSpeed = {60,50,45};
     public static int[] vehicleFuelEff = {12,6,4};
 
+    //Arrays used for the delivery handling
+    public static String[] deliveryStart = new String[50];
+    public static String[] deliveryEnd = new String[50];
+    public static double[] deliveryWeights = new double[50];
+    public static String[] deliveryVehicles = new String[50];
+    public static double[] deliveryDistances = new double[50];
+    public static double[] deliveryTimes = new double[50];
+    public static double[] deliveryCustomerCharges = new double[50];
+    public static double[] deliveryProfits = new double[50];
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int choice;
