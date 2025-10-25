@@ -1,6 +1,9 @@
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class LMS {
     // Arrays and Variables used for Cities
     public static String[] Cities = new String[30];
@@ -32,6 +35,7 @@ public class LMS {
 
 
     public static void main(String[] args) {
+        loadData();
         Scanner input = new Scanner(System.in);
         int choice;
         do{
@@ -48,7 +52,7 @@ public class LMS {
             switch (choice) {
                 case 1 -> manageCities(input);
                 case 2 -> manageDistances(input);
-                case 3 -> vehicleDetails(input);
+                case 3 -> vehicleDetails();
                 case 4 -> deliveryRequests(input);
                 case 5 -> pastDeliveryRecords(input);
                 case 6 -> performanceReport(input);
@@ -56,6 +60,7 @@ public class LMS {
                 default -> System.out.println("Invalid choice");
             }
         }while(choice !=0);
+        saveData();
 
     }
 
@@ -166,7 +171,7 @@ public class LMS {
         System.out.println("City removed successfully!");
     }
 
-    private static void allCities(Scanner input) {
+    public static void allCities(Scanner input) {
         //Method of displaying all the cities in the system
         System.out.println("\n---List of all cities---");
         if (cityCounter == 0) {
@@ -267,7 +272,7 @@ public class LMS {
     }
 
     //Vehicle management
-    public static void vehicleDetails(Scanner input){
+    public static void vehicleDetails(){
         //This is the sub menu including the Vehicle type, Capacity (kg), Rate per km (LKR), Avg Speed (km/h) and Fuel Efficiency (km/l)
         System.out.println("\n---Vehicle Details---");
 
@@ -453,7 +458,7 @@ public class LMS {
         } else {
             System.out.printf("%-12s %-12s %-10s %-10s %-10s %-15s\n",
                     "From", "To", "Weight(kg)", "Vehicle", "Distance(km)", "Charge(LKR)");
-            System.out.println("===========================================================");
+            System.out.println("=================================================================");
 
             for (int i = 0; i < deliveryCounter; i++) {
                 // Print each row
@@ -501,6 +506,7 @@ public class LMS {
             double avgTime = totTime/deliveryCounter;
 
             //Final Report
+            System.out.println("\n=====Performance Report======");
             System.out.printf("Total Deliveries Completed: %d\n", deliveryCounter);
             System.out.printf("Total Distance Covered:     %.2f km\n", totDistance);
             System.out.printf("Average Delivery Time:      %.2f hours\n", avgTime);
@@ -512,5 +518,125 @@ public class LMS {
         }
 
 
+    }
+    public static void saveData() {
+
+        // --- 1. Save routes.txt (Cities and Distances) ---
+        try (PrintWriter writer = new PrintWriter(new File("routes.txt"))) {
+
+            // Save the number of cities
+            writer.println(cityCounter);
+
+            // Save the list of city names
+            for (int i = 0; i < cityCounter; i++) {
+                writer.println(Cities[i]);
+            }
+
+            // Save the 2D distance matrix
+            for (int i = 0; i < cityCounter; i++) {
+                for (int j = 0; j < cityCounter; j++) {
+                    writer.print(distancesOfCities[i][j] + " ");
+                }
+                writer.println(); // Newline after each row
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Could not save data to routes.txt. " + e.getMessage());
+        }
+
+        // --- 2. Save deliveries.txt (Delivery History) ---
+        try (PrintWriter writer = new PrintWriter(new File("deliveries.txt"))) {
+
+            // Save the number of deliveries
+            writer.println(deliveryCounter);
+
+            // Save each delivery record on a new line, separated by commas
+            for (int i = 0; i < deliveryCounter; i++) {
+                writer.println(
+                        deliveryStart[i] + "," +
+                                deliveryEnd[i] + "," +
+                                deliveryWeights[i] + "," +
+                                deliveryVehicles[i] + "," +
+                                deliveryDistances[i] + "," +
+                                deliveryTimes[i] + "," +
+                                deliveryCustomerCharges[i] + "," +
+                                deliveryProfits[i]
+                );
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Could not save data to deliveries.txt. " + e.getMessage());
+        }
+
+        System.out.println("All data saved successfully.");
+    }
+
+    public static void loadData() {
+
+        // --- 1. Load routes.txt (Cities and Distances) ---
+        try {
+            File routesFile = new File("routes.txt");
+            if (routesFile.exists()) {
+                Scanner fileScanner = new Scanner(routesFile);
+
+                // Read the number of cities
+                cityCounter = fileScanner.nextInt();
+                fileScanner.nextLine(); // Consume newline
+
+                // Read the list of city names
+                for (int i = 0; i < cityCounter; i++) {
+                    Cities[i] = fileScanner.nextLine();
+                }
+
+                // Read the 2D distance matrix
+                for (int i = 0; i < cityCounter; i++) {
+                    for (int j = 0; j < cityCounter; j++) {
+                        distancesOfCities[i][j] = fileScanner.nextInt();
+                    }
+                }
+
+                fileScanner.close();
+                System.out.println("Loaded " + cityCounter + " cities and distances from routes.txt.");
+            } else {
+                System.out.println("routes.txt not found. Starting with new data.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error loading routes.txt: " + e.getMessage());
+        }
+
+        // --- 2. Load deliveries.txt (Delivery History) ---
+        try {
+            File deliveriesFile = new File("deliveries.txt");
+            if (deliveriesFile.exists()) {
+                Scanner fileScanner = new Scanner(deliveriesFile);
+
+                // Read the number of deliveries
+                deliveryCounter = fileScanner.nextInt();
+                fileScanner.nextLine(); // Consume newline
+
+                // Read each delivery record
+                for (int i = 0; i < deliveryCounter; i++) {
+                    String line = fileScanner.nextLine();
+                    String[] data = line.split(","); // Split the line by comma
+
+                    // Re-populate the arrays
+                    deliveryStart[i] = data[0];
+                    deliveryEnd[i] = data[1];
+                    deliveryWeights[i] = Double.parseDouble(data[2]);
+                    deliveryVehicles[i] = data[3];
+                    deliveryDistances[i] = Double.parseDouble(data[4]);
+                    deliveryTimes[i] = Double.parseDouble(data[5]);
+                    deliveryCustomerCharges[i] = Double.parseDouble(data[6]);
+                    deliveryProfits[i] = Double.parseDouble(data[7]);
+                }
+
+                fileScanner.close();
+                System.out.println("Loaded " + deliveryCounter + " delivery records from deliveries.txt.");
+            } else {
+                System.out.println("deliveries.txt not found. Starting with new data.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error loading deliveries.txt: " + e.getMessage());
+        }
     }
 }
