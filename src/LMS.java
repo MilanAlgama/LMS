@@ -453,7 +453,7 @@ public class LMS {
         } else {
             System.out.printf("%-12s %-12s %-10s %-10s %-10s %-15s\n",
                     "From", "To", "Weight(kg)", "Vehicle", "Distance(km)", "Charge(LKR)");
-            System.out.println("----------------------------------------------------------------------");
+            System.out.println("===========================================================");
 
             for (int i = 0; i < deliveryCounter; i++) {
                 // Print each row
@@ -464,7 +464,17 @@ public class LMS {
 
     //Performance report
     public static void performanceReport(Scanner input){
-        //This is the sub menu can be used to obtain report of the process at the time
+        //This is the sub menu can be used to obtain report of the process at the tim
+
+        //Check the possibility to create a report
+        if (deliveryCounter == 0) {
+            System.out.println("No deliveries to display a report..!");
+        }else{
+            System.out.println("\n=== Performance Reports ===");
+            System.out.println("-------------------------------");
+            //To be continued...
+        }
+
 
     }
 }
